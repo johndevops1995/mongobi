@@ -37,7 +37,9 @@ Definamos algunas variables, para que puedas reemplazarlas con las tuyas cuando 
 ✅ {{YourSchemaPath}} ✅ = / home/johndoe/mongobi/schema/schema.drdl # SI LO TIENE, NO SE
 ``` 
 ```REQUIERE 😋
+
 Ahora construye tu imagen como:
+
 
 
 ```java
