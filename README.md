@@ -43,7 +43,9 @@ Ahora construye tu imagen como:
 
 
 ```java
+```python
 docker build -t ✅ {{YourDockerUser}} ✅/mongobi .
+```
 
 ```
 ,,,
