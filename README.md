@@ -39,8 +39,10 @@ Definamos algunas variables, para que puedas reemplazarlas con las tuyas cuando 
 ```REQUIERE 😋
 Ahora construye tu imagen como:
 
+
 ```java
 docker build -t ✅ {{YourDockerUser}} ✅/mongobi .
+
 ```
 ,,,
 Para ejecutar esta imagen, primero cree una carpeta de registro, por ejemplo:
