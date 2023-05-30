@@ -7,6 +7,7 @@ Pero nada se pierde. Siempre puedes construir tu propia imagen. Aquí hay un Doc
 
 Dockerfile
 ,,,
+```
 FROM ubuntu:18.04
 WORKDIR /home/mongobi
 RUN apt-get update
@@ -20,15 +21,19 @@ RUN echo $PATH
 RUN install -m755 bin/mongo* /usr/local/bin/
 EXPOSE 3307
 CMD ["mongosqld", "--config=/home/mongobi/mongosqld.conf"]
+```
 ,,,
 Los paquetes instalados en el comando apt-get se determinaron como un proceso de prueba-error 😵.
 
 Definamos algunas variables, para que puedas reemplazarlas con las tuyas cuando sea necesario:
 
+
+```java
 ✅ {{YourLogFolder}} ✅ = /home/johndoe/mongobi/logs 
 ✅ {{YourConfFolder}} ✅ = /home/johndoe/mongobi/conf 
 ✅ {{YourDockerUser}} ✅ = johndoe 
-✅ {{YourSchemaPath}} ✅ = / home/johndoe/mongobi/schema/schema.drdl # SI LO TIENE, NO SE REQUIERE 😋
+✅ {{YourSchemaPath}} ✅ = / home/johndoe/mongobi/schema/schema.drdl # SI LO TIENE, NO SE 
+```REQUIERE 😋
 Ahora construye tu imagen como:
 ,,,
 docker build -t ✅ {{YourDockerUser}} ✅/mongobi .
