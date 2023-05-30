@@ -23,42 +23,30 @@ EXPOSE 3307
 CMD ["mongosqld", "--config=/home/mongobi/mongosqld.conf"]
 ```
 
-,,,
 Los paquetes instalados en el comando apt-get se determinaron como un proceso de prueba-error 😵.
 
 Definamos algunas variables, para que puedas reemplazarlas con las tuyas cuando sea necesario:
 
 
-```java
-```java
 ✅ {{YourLogFolder}} ✅ = /home/johndoe/mongobi/logs 
 ✅ {{YourConfFolder}} ✅ = /home/johndoe/mongobi/conf 
 ✅ {{YourDockerUser}} ✅ = johndoe 
-✅ {{YourSchemaPath}} ✅ = / home/johndoe/mongobi/schema/schema.drdl # SI LO TIENE, NO SE
-``` 
-```REQUIERE 😋
+✅ {{YourSchemaPath}} ✅ = / home/johndoe/mongobi/schema/schema.drdl # SI LO TIENE, NO SE REQUIERE 😋
 
 Ahora construye tu imagen como:
 
-
-
-```java
-```python
 docker build -t ✅ {{YourDockerUser}} ✅/mongobi .
-```
 
-```
-,,,
 Para ejecutar esta imagen, primero cree una carpeta de registro, por ejemplo:
-,,,
-mkdir ✅ {{YourLogFolder}} ✅
-,,,
-Y crea un mongosqld.conf (por ejemplo):
-,,,
-✅{{YourConfFolder}}✅/mongosqld.conf
-,,,
 
-```java
+mkdir ✅ {{YourLogFolder}} ✅
+
+Y crea un mongosqld.conf (por ejemplo):
+
+✅{{YourConfFolder}}✅/mongosqld.conf
+
+
+
 systemLog:
   path: '/logs/mongosqld.log'
   verbosity: 10
@@ -70,13 +58,12 @@ mongodb:
 net:
   bindIp: 0.0.0.0
   port: 3307
-```
-,,,
+
 Ahora, agregue nuestro servicio a docker-compose.yml (si lo tiene)
 
 docker-compose.yml
-,,,
-```java
+
+
 versión: "3" 
 servicios: 
   # ... MÁS SERVICIOS ... 
@@ -91,14 +78,13 @@ servicios:
     hostname: "mongo-bi" 
     puertos: 
       - "3307:3307"
-```
-,,,
+
 Ejecutemos nuestro contenedor (usando nuestra ruta docker-compose.yml):
-,,,
+
 docker-compose up -d
-,,,
+
 Pruebe si su contenedor se está ejecutando:
-,,,
+
 tsil -f -n 25 ✅ {{SuCarpetaDeRegistro}} ✅/mongosqld.log
 La salida debe ser similar a:
 
