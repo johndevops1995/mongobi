@@ -6,7 +6,7 @@ Mongo BI Connector es una herramienta increíble para usar su almacenamiento Mon
 Pero nada se pierde. Siempre puedes construir tu propia imagen. Aquí hay un Dockerfile simple para lograr este requisito. Debe usar un mongosqld.confpara ejecutar Mongo BI Connector con éxito.
 
 Dockerfile
-
+,,,
 FROM ubuntu:18.04
 WORKDIR /home/mongobi
 RUN apt-get update
@@ -20,6 +20,7 @@ RUN echo $PATH
 RUN install -m755 bin/mongo* /usr/local/bin/
 EXPOSE 3307
 CMD ["mongosqld", "--config=/home/mongobi/mongosqld.conf"]
+,,,
 Los paquetes instalados en el comando apt-get se determinaron como un proceso de prueba-error 😵.
 
 Definamos algunas variables, para que puedas reemplazarlas con las tuyas cuando sea necesario:
@@ -29,15 +30,17 @@ Definamos algunas variables, para que puedas reemplazarlas con las tuyas cuando 
 ✅ {{YourDockerUser}} ✅ = johndoe 
 ✅ {{YourSchemaPath}} ✅ = / home/johndoe/mongobi/schema/schema.drdl # SI LO TIENE, NO SE REQUIERE 😋
 Ahora construye tu imagen como:
-
+,,,
 docker build -t ✅ {{YourDockerUser}} ✅/mongobi .
+,,,
 Para ejecutar esta imagen, primero cree una carpeta de registro, por ejemplo:
-
+,,,
 mkdir ✅ {{YourLogFolder}} ✅
+,,,
 Y crea un mongosqld.conf (por ejemplo):
-
+,,,
 ✅{{YourConfFolder}}✅/mongosqld.conf
-
+,,,
 systemLog:
   path: '/logs/mongosqld.log'
   verbosity: 10
@@ -49,10 +52,11 @@ mongodb:
 net:
   bindIp: 0.0.0.0
   port: 3307
+,,,
 Ahora, agregue nuestro servicio a docker-compose.yml (si lo tiene)
 
 docker-compose.yml
-
+,,,
 versión: "3" 
 servicios: 
   # ... MÁS SERVICIOS ... 
@@ -67,22 +71,25 @@ servicios:
     hostname: "mongo-bi" 
     puertos: 
       - "3307:3307"
+,,,
 Ejecutemos nuestro contenedor (usando nuestra ruta docker-compose.yml):
+,,,
 docker-compose up -d
-
+,,,
 Pruebe si su contenedor se está ejecutando:
-
-cola -f -n 25 ✅ {{SuCarpetaDeRegistro}} ✅/mongosqld.log
+,,,
+tsil -f -n 25 ✅ {{SuCarpetaDeRegistro}} ✅/mongosqld.log
 La salida debe ser similar a:
 
-2019-12-16T18: 14: 16.404 + 0000 CONTROLO [iniciar y escuchar] mongosqld comenzando: versión = v2.13.1 pid = 1 host = mongo-bi 
-2019-12-16T18: 14: 16.404 + 0000 CONTROLO [iniciar y escuchar] versión git : bae9ae2a9bff80642215b648d46312804fe62f2d 
-2019-12-16T18:14:16.404+0000 I CONTROL [initandlisten] Versión de OpenSSL OpenSSL 1.1.1 11 de septiembre de 2018 (creado con OpenSSL 1.1.1 11 de septiembre de 2018) 2019-12-16T18:14:16.404+0000 
-yo CONTROL [initandlisten] opciones: {config: "/home/mongobi/mongosqld.conf", systemLog: {ruta: "/logs/mongosqld.log", verbosidad: 10}, esquema: {ruta: "/home/mongobi/ esquema.drdl"}, red: {bindIp: [0.0.0.0]}, mongodb: {red: {uri: "mongodb://instancia-0:27017,instancia-1:27017/?replicaSet=NeROUTE", autenticación : {fuente: "administrador"}}}}
-2019-12-16T18:14:16.404+0000 I CONTROL [initandlisten] ** ADVERTENCIA: El control de acceso no está habilitado para mongosqld. 
-2019-12-16T18:14:16.404+0000 I CONTROL [initandlisten] 
-2019-12-16T18:14:16.413+0000 I NETWORK [initandlisten] esperando conexiones en [::]:3307 
-2019-12-16T18:14: 16.413+0000 I NETWORK [initandlisten] esperando conexiones en /tmp/mysql.sock
+2019-12-16T18:14:16.404+0000 I CONTROL    [initandlisten] mongosqld starting: version=v2.13.1 pid=1 host=mongo-bi
+2019-12-16T18:14:16.404+0000 I CONTROL    [initandlisten] git version: bae9ae2a9bff80642215b648d46312804fe62f2d
+2019-12-16T18:14:16.404+0000 I CONTROL    [initandlisten] OpenSSL version OpenSSL 1.1.1  11 Sep 2018 (built with OpenSSL 1.1.1  11 Sep 2018)
+2019-12-16T18:14:16.404+0000 I CONTROL    [initandlisten] options: {config: "/home/mongobi/mongosqld.conf", systemLog: {path: "/logs/mongosqld.log", verbosity: 10}, schema: {path: "/home/mongobi/schema.drdl"}, net: {bindIp: [0.0.0.0]}, mongodb: {net: {uri: "mongodb://instance-0:27017,instance-1:27017/?replicaSet=NeROUTE", auth: {source: "admin"}}}}
+2019-12-16T18:14:16.404+0000 I CONTROL    [initandlisten] ** WARNING: Access control is not enabled for mongosqld.
+2019-12-16T18:14:16.404+0000 I CONTROL    [initandlisten]
+2019-12-16T18:14:16.413+0000 I NETWORK    [initandlisten] waiting for connections at [::]:3307
+2019-12-16T18:14:16.413+0000 I NETWORK    [initandlisten] waiting for connections at /tmp/mysql.sock
+
 Y voilà, se está ejecutando como un contenedor. 🤩
 
 Puede encontrar esta imagen en Docker Hub:
