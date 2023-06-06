@@ -101,4 +101,4 @@ La salida debe ser similar a:
 
 Y voilà, se está ejecutando como un contenedor. 🤩
 
-Puede encontrar esta imagen en Docker Hub:
+Creditos a su autor y Tomado de: https://eder-chamale.medium.com/building-a-docker-image-for-mongo-bi-connector-c9872b1821ba 
